@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" style="background-color: #000000;">
+<head style="background-color: #000000;">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -10,7 +10,7 @@
     <title>My Notes</title>
 </head>
 
-<body>
+<body style="background-color: #000000;">
     <div class="container mt-4">
         <h1 class="display-4 text-center">
             <i class="fas fa-book-open"></i>
@@ -25,9 +25,19 @@
                 <label for="content">NOTE</label>
                 <textarea class="form-control" id="content" rows="9"></textarea>
             </div>
-            <input type="submit" value="Save note" class="btn btn-primary btn-block">
+            <input type="submit" value="Save note" class="btn-block">
         </form>
     </div>
+
+    <div id="note-list" class="mt-5 d-flex flex-wrap"><div class="card text-white bg-primary mb-3">
+        <div class="card-header">
+            <span>my title</span>
+            <i class="fas fa-trash" noteid="1" aria-hidden="true"></i>
+        </div>
+        <div class="card-body bg-primary ">
+            <p class="card-text">my message</p>
+        </div>
+    </div></div>
 </body>
 
 </html>

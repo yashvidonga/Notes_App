@@ -1,29 +1,38 @@
 <html>
     <head>
-        <title>contact</title>
-        <link rel="stylesheet" href="contact.css">
+        <title>Contact</title>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
-    <div id="contact">
-        <div class="contact-form">
-            <h1 style="color: #357ea3;">CONTACT US</h1>
-            <div class="textb">
-                <label>FULL NAME:</label>
-                <input type="text" name="" value="" placeholder="Enter your name">
+        <div class="wrapper fadeInDown">
+            <div id="formContent">
+                <div class="fadeIn first">
+                    <h2>Contact Us</h2>
                 </div>
-                <div class="textb">
-                    <label>EMAIL ID:</label>
-                <input type="text" name="" value="" placeholder="Email ID">
-                </div>
-                <div class="textb">
-                    <label>MESSAGE:</label>
-                
-                    <textarea placeholder="Message"></textarea>
+
+                <span style = "color:'red'"></span>
+
+                <form>
+                    
+                    <input type="text" id="name" class="fadeIn second"  
+                     placeholder="Enter your Name"/>
+                    
+                    <input type="text" id="email" class="fadeIn third"
+                     placeholder="Enter your Email ID"/>
+                    
+                    <input type="text" id="message" class="fadeIn third"
+                    placeholder="Message"/>
+
+                    <input type="submit" class="fadeIn fourth" value="Submit"/>
+                </form>
+
+                <!-- <div id="formFooter">
+                    <a class="underlineHover" href="Login.html">Login</a>
+                </div> -->
             </div>
-            <a class="btn">SUBMIT</a>
-            </div>
+
             <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-            <div class="wrapper">
+            <div class="wrapper2">
                 <div class="button">          
                
                 <div class="icon"><a class="SM" target="_blank" href="mail:dmishika2002@gmail.com"><i  class="fas fa-envelope"></i></a></div>
@@ -43,5 +52,5 @@
                 <span>Linked-in</span>
             </div>
         </div>
-    </div>
-</body>
+    </body>
+</html>
