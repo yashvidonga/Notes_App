@@ -6,10 +6,30 @@
     background-color:rgb(255, 255, 255);
 }
 
-input[type="submit"], input[type="text"], .form-control{
-    background-color: #ffffff;
+input[type="submit"]{
+  background-color: #38b6ff;
+      color: white;
+    
     border: none;
-    color: rgb(0, 0, 0);
+    
+    padding: 10px ;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    -webkit-box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
+    box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+    margin: 5px 20px 20px 0px;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+  }
+  input[type="text"], .form-control{    border: none;
+    
     padding: 10px ;
     text-align: center;
     text-decoration: none;
@@ -27,8 +47,8 @@ input[type="submit"], input[type="text"], .form-control{
     transition: all 0.3s ease-in-out;
   }
   input[type="submit"]:hover {
-      background-color: #38b6ff;
-      color: white;
+    background-color: #ffffff;
+    color: black;
     -moz-transform: scale(0.95);
     -webkit-transform: scale(0.95);
     -o-transform: scale(0.95);
@@ -37,6 +57,8 @@ input[type="submit"], input[type="text"], .form-control{
   }
 
   input[type="submit"]:active {
+    background-color: #ffffff;
+color: rgb(0, 0, 0);
   -moz-transform: scale(0.95);
   -webkit-transform: scale(0.95);
   -o-transform: scale(0.95);
