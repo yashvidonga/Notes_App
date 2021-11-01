@@ -1,6 +1,9 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, flash
+from modelapp import Users, db
+# from werkzeug.utils import redirect
 
 app = Flask(__name__, template_folder='templates')
+app.secret_key = 'super secret key'
 
 
 @app.route('/')
@@ -18,9 +21,28 @@ def login():
     return render_template('Login.html')
 
 
-@app.route('/signup')
+@app.route('/signup', methods=['POST', 'GET'])
 def signup():
-    return render_template('SignUp.html')
+    if request.method == 'POST':
+        email_id = request.form['email']
+        password1 = request.form['password']
+        password_copy = request.form['cpassword']
+        if password_copy == password1 and len(password1) > 8:
+            new_user = Users(email=email_id, password=password1)
+            flash('Account Created Successfully')
+            try:
+                db.session.add(new_user)
+                db.session.commit()
+                return redirect('/')
+            except:
+                return 'Database Issue'
+
+        else:
+            error = 'Error: Incorrect Password'
+            return render_template('SignUp.html', error=error)
+
+    else:
+        return render_template('SignUp.html')
 
 
 @app.route('/notes')

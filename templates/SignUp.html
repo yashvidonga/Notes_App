@@ -1,3 +1,6 @@
+<head>
+    <title>Sign Up</title>
+</head>
 {% extends "navbar_temp.html" %}
 
 {% block navbar %}
@@ -8,18 +11,20 @@
                 <div class="fadeIn first">
                     <h2>Create Account</h2>
                 </div>
+                
+                {% if error %}  
+                    <span style = "color:red">{{ error }}</span>
+                {% endif %}  
 
-                <span style = "color:'red'"></span>
-
-                <form>
+                <form action="/signup", method="POST">
                     
-                    <input type="text" id="login" class="fadeIn second" 
+                    <input type="text" id="email" name='email' class="fadeIn second" 
                      placeholder="Email"/>
                     
-                    <input type="password" id="password" class="fadeIn third" 
+                    <input type="password" id="password" name='password' class="fadeIn third" 
                      placeholder="Password"/>
                     
-                    <input type="password" id="cpassword" class="fadeIn third" 
+                    <input type="password" id="cpassword" name='cpassword' class="fadeIn third" 
                     placeholder="Confirm Password"/>
 
                     <input type="submit" class="fadeIn fourth" value="Create"/>
