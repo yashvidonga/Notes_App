@@ -10,12 +10,17 @@
                 <div class="fadeIn first">
                     <h2>Login</h2>
                 </div>
-
-                <form action = "{{ url_for('notes') }}">
-                    <input type="text" id="login" class="fadeIn second"
+                {% if success %}  
+                    <span style = "color:green">{{ success }}</span>
+                {% endif %}  
+                {% if error %}  
+                    <span style = "color:red">{{ error }}</span>
+                {% endif %} 
+                <form action = "/login", method = "POST" >
+                    <input type="text" id="login" name="email" class="fadeIn second"
                     placeholder="Email" onChange={this.handleChange}/>
                     
-                    <input type="password" id="password" class="fadeIn third" 
+                    <input type="password" id="password" name="password" class="fadeIn third" 
                     placeholder="Password" />
                     
                     <input type="submit" class="fadeIn fourth" value="Log In"/>

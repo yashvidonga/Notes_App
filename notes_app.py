@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, flash
-from modelapp import Users, db
+from modelapp import Users, db, Contact
 # from werkzeug.utils import redirect
 
 app = Flask(__name__, template_folder='templates')
@@ -11,14 +11,22 @@ def index():
     return render_template('homepage.html')
 
 
-@app.route('/contact')
-def contact():
-    return render_template('contact.html')
-
-
-@app.route('/login')
+@app.route('/login', methods=['POST', 'GET'])
 def login():
-    return render_template('Login.html')
+    if request.method == 'POST':
+        email_id = request.form['email']
+        password1 = request.form['password']
+        print(type(email_id))
+        check_email = Users.query.filter_by(email=email_id).first()
+        if check_email is not None and check_email.password == password1:
+            success = 'Login SUCCESSFUL'
+            return render_template('Login.html', success=success)
+        else:
+            error = 'Login NOT successful!'
+            #print(list(Users.query.order_by(Users.email).first()))
+            return render_template('Login.html', error=error)
+    else:
+        return render_template('Login.html')
 
 
 @app.route('/signup', methods=['POST', 'GET'])
@@ -50,6 +58,20 @@ def notes():
 # def home():
 #     return "<h1>Welcome to the Home Page</h1>"
 
+@app.route('/contact', methods=['POST', 'GET'])
+def contact():
+    if request.method == 'POST':
+        email_id = request.form['email']
+        name1 = request.form['name']
+        message1 = request.form['message']
+        new_message = Contact(name=name1, email=email_id, message=message1)
+        flash('Message Sunday!')
+        db.session.add(new_message)
+        db.session.commit()
+        return redirect('/')        
+
+    else:
+        return render_template('contact.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

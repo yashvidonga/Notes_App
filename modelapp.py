@@ -19,3 +19,14 @@ class Users(db.Model):
     def __init__(self, email=None, password=None):
         self.email = email
         self.password = password
+
+class Contact(db.Model):
+    __tablename_ = 'contact'
+    name = db.Column(db.String(120), nullable=False)
+    email = db.Column(db.String(120), nullable=False)
+    message = db.Column(db.String(1200), primary_key=True, nullable=False)
+
+    def __init__(self, name=None, email=None, message=None):
+        self.name = name
+        self.email = email
+        self.message = message
