@@ -30,15 +30,12 @@ def signup():
         if password_copy == password1 and len(password1) > 8:
             new_user = Users(email=email_id, password=password1)
             flash('Account Created Successfully')
-            try:
-                db.session.add(new_user)
-                db.session.commit()
-                return redirect('/')
-            except:
-                return 'Database Issue'
-
+            db.session.add(new_user)
+            db.session.commit()
+            return redirect('/')
         else:
             error = 'Error: Incorrect Password'
+            #print(list(Users.query.order_by(Users.email).first()))
             return render_template('SignUp.html', error=error)
 
     else:
