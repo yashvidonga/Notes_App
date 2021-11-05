@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect, flash
-from modelapp import Users, db, Contact
-# from werkzeug.utils import redirect
+from modelapp import Users, db, Contact, Notes
 
 app = Flask(__name__, template_folder='templates')
 app.secret_key = 'super secret key'
@@ -16,14 +15,13 @@ def login():
     if request.method == 'POST':
         email_id = request.form['email']
         password1 = request.form['password']
-        print(type(email_id))
         check_email = Users.query.filter_by(email=email_id).first()
         if check_email is not None and check_email.password == password1:
             success = 'Login SUCCESSFUL'
-            return render_template('Login.html', success=success)
+            return render_template('notes.html')
         else:
             error = 'Login NOT successful!'
-            #print(list(Users.query.order_by(Users.email).first()))
+            # print(list(Users.query.order_by(Users.email).first()))
             return render_template('Login.html', error=error)
     else:
         return render_template('Login.html')
@@ -43,7 +41,7 @@ def signup():
             return redirect('/')
         else:
             error = 'Error: Incorrect Password'
-            #print(list(Users.query.order_by(Users.email).first()))
+            # print(list(Users.query.order_by(Users.email).first()))
             return render_template('SignUp.html', error=error)
 
     else:
@@ -52,11 +50,22 @@ def signup():
 
 @app.route('/notes')
 def notes():
-    return render_template('notes.html')
+    if request.method == "POST":
+        title = request.form['title']
+        content = request.form['content']
+        new_note = Notes(title=title, content=content)
+        db.session.add(new_note)
+        db.session.commit()
+        return render_template('notes.html', saved=True)
+    else:
+        return render_template('notes.html', saved=False)
+
+    return render_template('homepage.html')
 
 # @app.route('/home')
 # def home():
 #     return "<h1>Welcome to the Home Page</h1>"
+
 
 @app.route('/contact', methods=['POST', 'GET'])
 def contact():
@@ -68,10 +77,11 @@ def contact():
         flash('Message Sunday!')
         db.session.add(new_message)
         db.session.commit()
-        return redirect('/')        
+        return redirect('/')
 
     else:
         return render_template('contact.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
