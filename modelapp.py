@@ -25,8 +25,8 @@ class Users(db.Model):
 
 class Contact(db.Model):
     __tablename__ = 'contact'
-    name = db.Column(db.String(120), nullable=False)
-    email = db.Column(db.String(120), nullable=False)
+    name = db.Column(db.String(120), nullable=False, unique=False)
+    email = db.Column(db.String(120), nullable=False, unique=False)
     message = db.Column(db.String(1200), primary_key=True, nullable=False)
 
     def __init__(self, name=None, email=None, message=None):
@@ -37,9 +37,10 @@ class Contact(db.Model):
 
 class Notes(db.Model):
     __tablename__ = 'notes'
-    title = db.Column(db.String(1200), primary_key=True, nullable=False)
-    content = db.Column(db.String(1200), nullable=False)
+    title = db.Column(db.String(1200), nullable=False, primary_key=True)
+    content = db.Column(db.String(1200), nullable=False, unique=False)
 
-    def __init__(self, title=None, content=None) -> None:
+    def __init__(self, title=None, content=None):
         self.title = title
         self.content = content
+
