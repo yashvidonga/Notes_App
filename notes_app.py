@@ -78,6 +78,16 @@ def delete():
     allNotes = db.session.query(Notes).all()
     return render_template('notes.html', saved=True, allNotes=allNotes)
 
+@app.route('/edit', methods=['POST'])
+def edit():
+    note = Notes.query.get(request.form.get('title'))
+    #print(note)
+    note.title = request.form['title']
+    note.content = request.form['content']
+    #print(note)
+    db.session.commit()
+    
+    return render_template('notes.html', saved=True, allNotes=allNotes)
 
 @app.route('/contact', methods=['POST', 'GET'])
 def contact():
