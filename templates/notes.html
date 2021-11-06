@@ -36,7 +36,7 @@
         <div class="card-header">
             <button class="btn"><i class="far fa-edit"></i></button>            
             <span>{{note.title}}</span>
-            <form method="POST" action="./delete"></form>
+            <form method="POST" action="/delete">
             <input type="hidden" value="{{note.title}}" name="title">
             <button type="submit" class="btn"><i class="fas fa-trash"></i></button></form> 
         </div>

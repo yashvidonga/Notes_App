@@ -48,7 +48,7 @@ def signup():
         return render_template('SignUp.html')
 
 
-@app.route('/notes', methods = ['GET', 'POST'])
+@app.route('/notes', methods=['GET', 'POST'])
 def notes():
     if request.method == "POST":
         title = request.form['title']
@@ -58,9 +58,9 @@ def notes():
         db.session.commit()
         saved = False
         allNotes = db.session.query(Notes).all()
-        return render_template('notes.html', saved=True, allNotes = allNotes)
+        return render_template('notes.html', saved=True, allNotes=allNotes)
     else:
-        return render_template('notes.html', saved=False, allNotes = allNotes)
+        return render_template('notes.html', saved=False)
 
     return render_template('homepage.html')
 
@@ -68,15 +68,15 @@ def notes():
 # def home():
 #     return "<h1>Welcome to the Home Page</h1>"
 
+
 @app.route('/delete', methods=['POST'])
 def delete():
-        title = request.form['title']
-        note = Notes.query.filter_by(title=title).first()
-        db.session.delete(note)
-        db.session.commit()
-        return redirect("/")
-        
-
+    title = request.form['title']
+    note = Notes.query.filter_by(title=title).first()
+    db.session.delete(note)
+    db.session.commit()
+    allNotes = db.session.query(Notes).all()
+    return render_template('notes.html', saved=True, allNotes=allNotes)
 
 
 @app.route('/contact', methods=['POST', 'GET'])
