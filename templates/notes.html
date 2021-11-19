@@ -15,7 +15,11 @@
         <h1 class="display-4 text-center">
             <i class="fas fa-book-open"></i>
             My Notes
-        </h1>
+            <a href="{{ url_for('index') }}" id = "logout" class="btn btn-secondary btn-sm" style="float: right;">
+                <span class="glyphicon glyphicon-log-out"></span>Logout
+              </a>
+        </h1>      
+          
         <form id="note-form" action = "/notes", method = "POST" >
             <div class="form-group">
                 <label for="title">TITLE</label>
@@ -35,10 +39,7 @@
     <div id="note-list" class="mt-5 d-flex flex-wrap"><div class="card text-white bg-primary mb-3">
         <div class="card-header">
             <!-- <button class="btn"><i class="far fa-edit"></i></button>             -->
-            <span>{{note.title}}</span>
-            <form method="POST" action="/edit" id = "del">
-            <input type="hidden" value="{{note.title}}" name="title">
-            <button type="submit" class="btn"><i class="fas fa-edit"></i></button></form> 
+            <span>{{note.title}}</span> 
             <form method="POST" action="/delete" id = "del">
             <input type="hidden" value="{{note.title}}" name="title">
             <button type="submit" class="btn"><i class="fas fa-trash"></i></button></form> 

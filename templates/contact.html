@@ -10,7 +10,9 @@
                 <div class="fadeIn first">
                     <h2>Contact Us</h2>
                 </div>
-
+                {% if contact %}
+                <script>alert("Your message was NOT sent!")</script>
+                {% endif %}
                 <span style = "color:'red'"></span>
                 <form action='/contact', method="POST">
                     

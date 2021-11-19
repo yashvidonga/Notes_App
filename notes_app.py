@@ -35,10 +35,9 @@ def signup():
         password_copy = request.form['cpassword']
         if password_copy == password1 and len(password1) > 8:
             new_user = Users(email=email_id, password=password1)
-            flash('Account Created Successfully')
             db.session.add(new_user)
             db.session.commit()
-            return redirect('/')
+            return render_template('SignUp.html', signup=True)
         else:
             error = 'Error: Incorrect Password'
             # print(list(Users.query.order_by(Users.email).first()))
@@ -78,17 +77,6 @@ def delete():
     allNotes = db.session.query(Notes).all()
     return render_template('notes.html', saved=True, allNotes=allNotes)
 
-@app.route('/edit', methods=['POST'])
-def edit():
-    note = Notes.query.get(request.form.get('title'))
-    #print(note)
-    note.title = request.form['title']
-    note.content = request.form['content']
-    #print(note)
-    db.session.commit()
-    
-    return render_template('notes.html', saved=True, allNotes=allNotes)
-
 @app.route('/contact', methods=['POST', 'GET'])
 def contact():
     if request.method == 'POST':
@@ -96,14 +84,13 @@ def contact():
         name1 = request.form['name']
         message1 = request.form['message']
         new_message = Contact(name=name1, email=email_id, message=message1)
-        flash('Message Sunday!')
         db.session.add(new_message)
         db.session.commit()
-        return redirect('/')
-
+        contact = True
+        return render_template('homepage.html', contact = contact)
     else:
         return render_template('contact.html')
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='127.0.0.1', port=5002)
